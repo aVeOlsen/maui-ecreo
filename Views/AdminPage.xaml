@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiTemplateEcreo.Views.AdminPage"
+             Title="Admin"
+             xmlns:model="clr-namespace:MauiTemplateEcreo.Model"
+             xmlns:viewmodel="clr-namespace:MauiTemplateEcreo.ViewModel"
+             x:DataType="viewmodel:AdminViewModel"
+             x:Name="UserAdmin">
+    <Grid Padding="2">
+
+        <!--<RefreshView IsVisible="{x:OnPlatform Android=True, WinUI=False, UWP=False}"
+            IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                     RefreshColor="Red"
+                     Command="{Binding RefreshCommand}"
+                     IsEnabled="{Binding IsNotBusy}">
+            <CollectionView BackgroundColor="Transparent"
+                            SelectionMode="None" 
+                            ItemsSource="{Binding UsersGet}">-->
+        <ListView IsVisible="{x:OnPlatform Android=True, WinUI=False, UWP=False, iOS=True, MacCatalyst=False}"
+                      BackgroundColor="Transparent" 
+                      SelectionMode="None" 
+                      ItemsSource="{Binding UsersGet}"
+                      IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      IsPullToRefreshEnabled="True"
+                      RefreshControlColor="{x:OnPlatform Android=Red, iOS=Gray}" 
+                      HasUnevenRows="True"
+                      SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="model:UserGetModel">
+                            <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <MenuItem Command="{Binding Source={x:Reference UserAdmin}, Path=BindingContext.RemoveCommand}"
+                                  CommandParameter="{Binding .}"
+                                  Text="Delete"/>
+                                    <MenuItem Command="{Binding Source={x:Reference UserAdmin}, Path=BindingContext.UpdateCommand}"
+                                  CommandParameter="{Binding .}"
+                                  Text="Update"/>
+                                </ViewCell.ContextActions>
+                                <Grid Padding="5" RowSpacing="5" ColumnSpacing="5">
+                                    <Frame CornerRadius="10" HasShadow="True" IsClippedToBounds="True">
+                                        <StackLayout Padding="0" Orientation="Horizontal" Spacing="10">
+                                            <Image Source="{Binding ImageURL}"  WidthRequest="80"/>
+                                            <StackLayout Padding="5" VerticalOptions="Center">
+                                                <Label FontSize="Large" Text="{Binding Firstname,Mode=OneTime}" VerticalOptions="Center" />
+                                                <Label FontSize="Large" Text="{Binding Lastname, Mode=OneTime}" VerticalOptions="Center"/>
+                                                <Label FontSize="Small" Text="{Binding Role}" VerticalOptions="Center" />
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Frame>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+
+                    </ListView.ItemTemplate>
+                </ListView>
+        <RefreshView IsVisible="{x:OnPlatform Android=False, WinUI=True, UWP=True, iOS=False, MacCatalyst=True}"
+            IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                     RefreshColor="Red"
+                     Command="{Binding RefreshCommand}"
+                     IsEnabled="{Binding IsNotBusy}">
+            <CollectionView BackgroundColor="Transparent"
+                            SelectionMode="None" 
+                            ItemsSource="{Binding UsersGet}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:UserGetModel">
+                        <Grid Padding="5" RowSpacing="5" ColumnSpacing="5">
+                                <Frame CornerRadius="10" HasShadow="True" IsClippedToBounds="True">
+                                    <StackLayout Padding="0" Orientation="Horizontal" Spacing="10">
+                                        <Image Source="{Binding ImageURL}" MinimumHeightRequest="200" MaximumWidthRequest="100"/>
+                                        <StackLayout Padding="5" VerticalOptions="Center">
+                                            <Label FontSize="Large" Text="{Binding Firstname,Mode=OneTime}" VerticalOptions="Center" />
+                                            <Label FontSize="Large" Text="{Binding Lastname, Mode=OneTime}" VerticalOptions="Center"/>
+                                            <Label FontSize="Small" Text="{Binding Role}" VerticalOptions="Center" />
+                                        </StackLayout>
+                                    <StackLayout HorizontalOptions="EndAndExpand">
+                                        <Button HorizontalOptions="EndAndExpand" Text="Opdater" Command="{Binding Source={x:Reference UserAdmin},
+                                        Path=BindingContext.UpdateCommand}" CommandParameter="{Binding .}" />
+                                        <Button HorizontalOptions="EndAndExpand" Text="Fjern" Command="{Binding Source={x:Reference UserAdmin},
+                                        Path=BindingContext.RemoveCommand}" CommandParameter="{Binding .}" />
+                                    </StackLayout>
+                                </StackLayout>
+                                </Frame>
+                            </Grid>
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+        <!--</VerticalStackLayout>-->
+    </Grid>
+
+</ContentPage>

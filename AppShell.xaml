@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MauiTemplateEcreo.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MauiTemplateEcreo"
+    xmlns:views="clr-namespace:MauiTemplateEcreo.Views"
+    xmlns:model="clr-namespace:MauiTemplateEcreo.Model">
+    
+    <!--Shell.FlyoutItemIsVisible="False"
+    Shell.NavBarIsVisible="True"
+    Shell.TabBarIsVisible="True">-->
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Tertiary}" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+            <!--<Setter Property="Shell.TabBarIsVisible" Value="{x:OnIdiom Desktop=True, Phone=True}"/>
+                <Setter Property="Shell.NavBarIsVisible" Value="{x:OnIdiom Desktop=True, Phone=True}"/>-->
+            </Style>
+                
+    <!--<Setter Property="Shell.IsVisible" Value="{x:OnIdiom Desktop=True, Phone=False}"/>-->
+    <!--<Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Blue100Accent}" />-->
+    <!--<Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="White"/>-->
+    
+            <!--</Style>
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}">
+            </Style>-->
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}"/>
+            <Style x:Key="ShellItemStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="DarkOrange"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+            </Style>
+            <Style TargetType="ShellItem" BasedOn="{StaticResource ShellItemStyle}">
+            </Style>
+            <Style TargetType="views:LoginPage" >
+                <Setter Property="Shell.NavBarIsVisible" Value="False"/>
+                <Setter Property="FlyoutItem.IsVisible" Value="False"/>
+                <Setter Property="FlyoutItem.IsEnabled" Value="False"/>
+                <Setter Property="Shell.FlyoutIsPresented" Value="False"/>
+                <Setter Property="Shell.TabBarIsVisible" Value="False"/>
+            </Style>
+
+
+
+            
+    <!--Default Styles for all Flyout Items
+            https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#flyoutitem-and-menuitem-style-classes-->
+    
+
+
+            <Style Class="FlyoutItemLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"></Setter>
+            </Style>
+            <Style Class="FlyoutItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{x:OnPlatform UWP=White, WinUI=White, Android=White, iOS=White}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Primary}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Blue100Accent}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+
+
+            
+    <!--Custom Style you can apply to any Flyout Item-->
+    
+
+
+            <!--<Style Class="MenuItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Primary}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>-->
+        </ResourceDictionary>
+    </Shell.Resources>
+    
+    <!--<Shell.FlyoutFooter>
+        <ShellContent IsVisible="False"></ShellContent>
+    </Shell.FlyoutFooter>-->
+    <!--
+    <Shell.MenuItemTemplate>
+        <DataTemplate>
+            <ContentView>
+                <ContentView.Content>
+                    <Grid ColumnDefinitions="0.1*,0.8*">
+                        <Image Source="{Binding Icon}"/>
+                        <Label Text="{Binding Text}" Grid.Column="1"/>
+                    </Grid>
+                </ContentView.Content>
+            </ContentView>
+        </DataTemplate>
+    </Shell.MenuItemTemplate>-->
+
+    <ShellItem Route="LoginPage" Shell.NavBarIsVisible="False" FlyoutItemIsVisible="False">
+        <ShellContent Title="Login" FlyoutItemIsVisible="False" Route="LoginPage" ContentTemplate="{DataTemplate views:LoginPage}"/>
+    </ShellItem>
+
+    <FlyoutItem IsVisible="True" Title="Office Status" >
+        <Tab Title="Office Status" IsVisible="True" FlyoutDisplayOptions="AsSingleItem" Route="OfficeStatus">
+            <ShellContent Title="Kontor" Route="OfficeStatus" ContentTemplate="{DataTemplate views:OfficeStatusPage}" />
+            <ShellContent Title="Hjemme" Route="HomeStatusPage" ContentTemplate="{DataTemplate views:HomeStatusPage}"/>
+            <ShellContent Title="Syge" Route="AbsenceStatusPage" ContentTemplate="{DataTemplate views:AbsenceStatusPage}"/>
+            <!--Route="OfficeStatusPage" ContentTemplate="{DataTemplate views:OfficeStatusPage}"-->
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem FlyoutItemIsVisible="True" Title="Admin">
+        <Tab Title="Admin" IsVisible="True">
+            <ShellContent Title="Admin" Route="AdminPage" ContentTemplate="{DataTemplate views:AdminPage}"/>
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem IsVisible="True" Title="Settings">
+        <Tab Title="Settings" IsVisible="True">
+            <ShellContent Title="Settings" Route="SettingsPage" ContentTemplate="{DataTemplate views:SettingsPage}"/>
+        </Tab>
+
+    </FlyoutItem>
+    <MenuItem Text="Log ud" Clicked="SignOut_Clicked"/>
+
+    <!--<Tab Route="AbsenceReportPage" BindingContext="{DataTemplate views:AbsenceReportPage}"/>
+    <Tab Route="UpdateUserPage" BindingContext="{DataTemplate views:UpdateUserPage}"/>-->
+    <!--ContentTemplate="{DataTemplate local:OfficeStatusPage}"
+        Route="OfficeStatusPage" />-->
+
+</Shell>

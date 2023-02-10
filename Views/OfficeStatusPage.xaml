@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="OfficeStatus"
+             x:Class="MauiTemplateEcreo.Views.OfficeStatusPage"
+             xmlns:model="clr-namespace:MauiTemplateEcreo.Model"
+             xmlns:viewmodel="clr-namespace:MauiTemplateEcreo.ViewModel"
+             x:DataType="viewmodel:OfficeStatusViewModel">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Report Absence" Command="{Binding OpenAbsenceCmd}" CommandParameter="{Binding .}" />
+    </ContentPage.ToolbarItems>
+        <Grid>
+
+            <RefreshView IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                     RefreshColor="Red"
+                     Command="{Binding RefreshCommand}"
+                     IsEnabled="{Binding IsNotBusy}">
+                <CollectionView BackgroundColor="Transparent" 
+                            SelectionMode="None" 
+                            ItemsSource="{Binding UsersGet}"
+                            >
+                    <!--IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                      RefreshCommand="{Binding RefreshCommand}" 
+                      IsPullToRefreshEnabled="True"
+                      Background="White"
+                      RefreshControlColor="Red"
+                      HasUnevenRows="True"
+                      SelectionMode="None"
+                      SeparatorVisibility="None">-->
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:UserGetModel">
+
+                            <Grid Padding="10" RowSpacing="10" ColumnSpacing="10">
+
+                                <Frame CornerRadius="10" HasShadow="True" IsClippedToBounds="True">
+                                    <StackLayout Padding="10" Orientation="Horizontal" Spacing="20">
+                                        <Image Source="{Binding ImageURL}" WidthRequest="100"/>
+                                        <StackLayout Padding="10" VerticalOptions="Center">
+                                        <Label FontSize="Large" Text="{Binding Firstname,Mode=OneTime}" VerticalOptions="Center" />
+                                        <Label FontSize="Large" Text="{Binding Lastname, Mode=OneTime}" VerticalOptions="Center" />
+                                        <Label FontSize="Small" Text="{Binding CurrentAbsenceStatus}" VerticalOptions="Center" />
+                                    </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+            <!--</VerticalStackLayout>-->
+        </Grid>
+
+</ContentPage>

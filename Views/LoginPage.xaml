@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiTemplateEcreo.Views.LoginPage"
+             Title="Login"
+             xmlns:viewmodel="clr-namespace:MauiTemplateEcreo.ViewModel"
+             x:DataType="viewmodel:LoginViewModel">
+    <ContentPage.Content>
+        <StackLayout Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+            <Label Text="Username:"/>
+            <!--<controls:ValidatableEntry x:Name="UserNameValidation" Placeholder="Username" Label="Username:" Value="{Binding BindingContext.UserName, Source={x:Reference Login}}" ValidationRule="{Binding BindingContext.UserNameValidation, Source={x:Reference Login}}"/>-->
+            <Entry Placeholder="Username" Text="{Binding UserName}">
+                <!--<Entry.Behaviors>
+                    
+            --><!--<xct:TextValidationBehavior InvalidStyle="{Binding UserNameValidation}" MinimumLength="3" MaximumLength="10"/>--><!--
+            
+                    <behaviors:ValidationBehavior x:Name="UserNameValidation" ValidationRule="{Binding BindingContext.UserNameValidation, Source={x:Reference Login}}"/>
+                </Entry.Behaviors>-->
+            </Entry>
+            <!--<Label Text="UserName Is Required" FontSize="12" TextColor="Gray" IsVisible="{Binding HasError, Source={x:Reference UserNameValidation}}"/>-->
+            <Label Text="Password:"/>
+            <Entry IsPassword="True" Text="{Binding Password}" Placeholder="Password"/>
+            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" Color="Red"></ActivityIndicator>
+            <Button Text="Login" Command="{Binding LoginCommand}" CommandParameter="{Binding .}" />
+            <!--<Label Text="Register" HorizontalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Label.GestureRecognizers>
+            </Label>-->
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

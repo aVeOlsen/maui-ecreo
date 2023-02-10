@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiTemplateEcreo.Views.UpdateUserPage"
+             Title="Update User"
+             xmlns:model="clr-namespace:MauiTemplateEcreo.Model" 
+             xmlns:viewmodel="clr-namespace:MauiTemplateEcreo.ViewModel"
+             x:DataType="viewmodel:UpdateUserViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Name="UpdateUser">
+    <!--<ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:EnumToIntConverter x:Key="EnumToIntConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>-->
+    <Grid ColumnDefinitions="200,*">
+        <StackLayout Padding="30" Margin="5" Orientation="Vertical" Grid.Column="0" VerticalOptions="Start">
+            <Label Text="Fornavn:"/>
+            <Entry Text="{Binding User.FirstName}"/>
+            <Label Text="Efternavn:"/>
+            <Entry Text="{Binding User.LastName}"/>
+            <Label Text="Email:"/>
+        <Entry Text="{Binding User.PersonalInformation.Email}"/>
+        <!--<Label Text="Telefonnummer:"/>-->
+        
+            <!--<Entry Text="{Binding Source={x:Reference UpdateUser}, Path=BindingContext.Phone}"/>-->
+            <!--
+        <Entry Text="{Binding User.PersonalInformation.Phone}"/>
+        <Label Text="Address:"/>
+        <Entry Text="{Binding User.PersonalInformation.Address}"/>
+        <Label Text="Password:"/>
+        <Entry Text="{Binding Password}"/>-->
+            <Label Text="Role:"/>
+            <Picker Title="Select A Role" ItemsSource="{Binding AllRoles}"
+                                            SelectedIndex="{Binding SelectedRole}" TitleColor="Orange" TextColor="Black"/>
+            <Label Text="Billede: "/>
+            <Image WidthRequest="{OnIdiom Desktop=300, Phone=80}" Source="{Binding User.ImageURL}" Margin="20" HorizontalOptions="Start"/>
+            <ActivityIndicator IsVisible="{Binding IsBusy}"
+                               IsRunning="{Binding IsBusy}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+            <!--Padding="20,0"-->
+            <StackLayout HorizontalOptions="Start" Orientation="Vertical" Grid.Column="1" Padding="30" Margin="10">
+                <Button Text="Tag nyt billed" IsVisible="{OnIdiom Desktop=False, Phone=True, Tablet=True}" IsEnabled="{OnIdiom Desktop=False, Phone=True, Tablet=True}" 
+                        Command="{Binding TakePhotoCommand}" HorizontalOptions="Start" VerticalOptions="EndAndExpand"/>
+                
+                <Button Text="Upload nyt billed" Command="{Binding UploadPhotoCommand}" HorizontalOptions="Start" VerticalOptions="EndAndExpand"/>
+                <Button x:DataType="model:UserModel"
+                Command="{Binding Source={x:Reference UpdateUser}, Path=BindingContext.UpdateCommand}"
+                CommandParameter="{Binding .}"
+                HorizontalOptions="Start"
+                IsEnabled="{Binding Source={x:Reference UpdateUser}, Path=BindingContext.IsNotBusy}"
+                Text="Save"
+                Padding="20"
+                Margin="20"
+                VerticalOptions="EndAndExpand"
+                />
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+</ContentPage>

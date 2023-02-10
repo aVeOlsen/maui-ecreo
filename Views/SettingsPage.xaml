@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiTemplateEcreo.Views.SettingsPage"
+             Title="Settings">
+    <!--xmlns:fontawesome="clr-namespace:Android.Graphics.Fonts;assembly=Mono.Android"-->
+
+    <Grid IsVisible="{OnIdiom Desktop=True, Phone=True, Tablet=False}" Padding="12">
+        <StackLayout Grid.Column="1">
+            <Label Margin="0,0,0,0"
+                    Text="THEME" />
+            <Frame>
+                <Grid ColumnDefinitions="65,*,*,*,*,*,*"
+                        ColumnSpacing="10"
+                        RadioButtonGroup.GroupName="ThemeGroup"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="20">
+                    <Label Grid.Column="0"
+                        FontSize="Small"
+                        Text="System"
+                        TextColor="#323130" />
+                    <RadioButton
+                            x:Name="RadioButtonSystem"
+                            Grid.Column="1"
+                            CheckedChanged="RadioButton_CheckedChanged"
+                            Value="System">
+                        <!--<RadioButton.Content>-->
+                        <!--<StackLayout HorizontalOptions="Center" VerticalOptions="Center">-->
+                        <!--<Image Scale="0.75" Source="{FontImage FontFamily=FAS, Color=#323130}" />-->
+                        <!--</StackLayout>-->
+                        <!--</RadioButton.Content>-->
+                    </RadioButton>
+                    <Label Grid.Column="2"
+                        FontSize="Small"
+                        Text="Light"
+                        TextColor="#323130" />
+                    <RadioButton x:Name="RadioButtonLight"
+                            Grid.Column="3"
+                            CheckedChanged="RadioButton_CheckedChanged"
+                            Value="Light">
+                        <!--<RadioButton.Content>
+                                <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                    -->
+                        <!--<Image Scale="0.75" Source="{FontImage FontFamily=FAS, Color=#323130}" />-->
+                        <!--
+                                    <Label
+                                        FontSize="Small"
+                                        Text="Light"
+                                        TextColor="#323130" />
+                                </StackLayout>
+                            </RadioButton.Content>-->
+                    </RadioButton>
+                    <Label Grid.Column="4"
+                        FontSize="Small"
+                        Text="Dark"
+                        TextColor="#323130" />
+                    <RadioButton x:Name="RadioButtonDark"
+                            Grid.Column="5"
+                            CheckedChanged="RadioButton_CheckedChanged"
+                            Value="Dark">
+                        <!--<RadioButton.Content>
+                                <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                    -->
+                        <!--<Image Scale="0.75" Source="{FontImage FontFamily=FAS, Color=#323130}" />-->
+                        <!--
+                                    <Label
+                                        FontSize="Small"
+                                        Text="Dark"
+                                        TextColor="#323130" />
+                                </StackLayout>
+                            </RadioButton.Content>-->
+                    </RadioButton>
+                </Grid>
+            </Frame>
+        </StackLayout>
+    </Grid>
+    <!--</ScrollView>-->
+</ContentPage>
